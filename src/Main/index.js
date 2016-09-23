@@ -23,16 +23,13 @@ const styles = StyleSheet.create({
 const Page = ({color, pageText, count}) => {
   return (
     <View style={[styles.tabContent, {backgroundColor: color}]}>
-      <Text style={styles.tabText}>{pageText}</Text>
-      <Text style={styles.tabText}>{count} re-renders of the {pageText}</Text>
+      <Text style={styles.tabText}>Страница с backgroundColor: {color}</Text>
     </View>
   );
 }
 
 Page.propTypes = {
-  color: PropTypes.string.isRequired,
-  pageText:PropTypes.string.isRequired,
-  count:PropTypes.number.isRequired
+  color: PropTypes.string.isRequired
 };
 
 export default Page;
