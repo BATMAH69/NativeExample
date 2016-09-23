@@ -3,12 +3,7 @@
  */
 
 import React, {PropTypes} from  'react';
-import {
-  TouchableHighlight,
-  View,
-  Text,
-  StyleSheet
-} from 'react-native'
+import { TouchableHighlight, View, Text, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -59,4 +54,4 @@ DrawerMenu.propTypes = {
   onPress: PropTypes.func.isRequired
 };
 
-module.exports = { DrawerMenuItem, DrawerMenu };
+export { DrawerMenuItem, DrawerMenu };

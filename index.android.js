@@ -5,21 +5,15 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  DrawerLayoutAndroid
-} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, DrawerLayoutAndroid } from 'react-native';
 
-import {DrawerMenu, DrawerMenuItem} from './src/DrawerMenu';
-import Page from './src/Main';
-import { buttons } from './src/Navigation'
+import { DrawerMenu } from './src/DrawerMenu';
+import { Page } from './src/Page';
+import { buttons } from './src/pages'
 
 class NativeExample extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       color: 'green'
@@ -27,17 +21,19 @@ class NativeExample extends Component {
   }
 
   render() {
+
+    const menu = () => (
+      <DrawerMenu
+        buttons={buttons}
+        onPress={(color) => {this.setState({ color: color }), this.drawer.closeDrawer()}}
+      />);
+
     return (
       <DrawerLayoutAndroid
         ref={(ref) => (this.drawer = ref)}
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() =>
-          <DrawerMenu
-            buttons={buttons}
-            onPress={(color) => { this.setState({color: color}), 	this.drawer.closeDrawer()}}
-          />
-        }
+        renderNavigationView={menu}
       >
         <Page color={this.state.color} />
       </DrawerLayoutAndroid>

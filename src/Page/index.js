@@ -3,11 +3,7 @@
  */
 'use strict';
 import React, { PropTypes } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   tabContent: {
@@ -32,4 +28,4 @@ Page.propTypes = {
   color: PropTypes.string.isRequired
 };
 
-export default Page;
+export { Page };

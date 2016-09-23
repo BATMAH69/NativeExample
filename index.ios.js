@@ -5,16 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  DrawerLayoutAndroid
-} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, DrawerLayoutAndroid } from 'react-native';
 
-import Page from './src/Main';
-import { buttons } from './src/Navigation'
+import { Page } from './src/Page';
+import { buttons } from './src/pages'
 
 const styles = StyleSheet.create({
   tabContent: {
@@ -35,22 +29,26 @@ class NativeExample extends Component {
   }
 
   render() {
+
+    const tabs = buttons.map((item, key) => (
+      <TabBarIOS.Item
+        key={key}
+        title={item.title}
+        systemIcon={item.icon}
+        selected={this.state.color === item.color}
+        onPress={() => this.setState({ color: item.color })}
+      >
+        <Page color={this.state.color} />
+      </TabBarIOS.Item>)
+    );
+
     return (
       <TabBarIOS
         unselectedTintColor="yellow"
         tintColor="white"
         barTintColor="darkslateblue"
       >
-        { buttons.map((item, key) => (
-          <TabBarIOS.Item
-            title={item.title}
-            systemIcon={item.icon}
-            selected={this.state.color === item.color}
-            onPress={() => this.setState({ color: item.color })}
-          >
-            <Page color={this.state.color} />
-          </TabBarIOS.Item>)
-        )}
+        {tabs}
       </TabBarIOS>
     );
   }
