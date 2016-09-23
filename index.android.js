@@ -15,9 +15,7 @@ class NativeExample extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      color: 'green'
-    }
+    this.state = { color: 'green' }
   }
 
   getMenu() {
@@ -25,11 +23,11 @@ class NativeExample extends Component {
       <DrawerMenu
         buttons={buttons}
         onPress={(color) => { this.setState({ color: color }, () => this.drawer.closeDrawer()) }}
-      />)
+      />
+    );
   }
 
   render() {
-
     return (
       <DrawerLayoutAndroid
         ref={(ref) => (this.drawer = ref)}

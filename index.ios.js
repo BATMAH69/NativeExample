@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, DrawerLayoutAndroid } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, TabBarIOS } from 'react-native';
 
 import { Page } from './src/Page';
 import { buttons } from './src/pages'
