@@ -28,9 +28,8 @@ class NativeExample extends Component {
     this.state = { color: 'green' };
   }
 
-  render() {
-
-    const tabs = buttons.map((item, key) => (
+  getTabs() {
+    return buttons.map((item, key) => (
       <TabBarIOS.Item
         key={key}
         title={item.title}
@@ -41,14 +40,16 @@ class NativeExample extends Component {
         <Page color={this.state.color} />
       </TabBarIOS.Item>)
     );
+  }
 
+  render() {
     return (
       <TabBarIOS
         unselectedTintColor="yellow"
         tintColor="white"
         barTintColor="darkslateblue"
       >
-        {tabs}
+        {() => this.getTabs()}
       </TabBarIOS>
     );
   }

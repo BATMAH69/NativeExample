@@ -20,20 +20,22 @@ class NativeExample extends Component {
     }
   }
 
-  render() {
-
-    const menu = () => (
+  getMenu() {
+    return (
       <DrawerMenu
         buttons={buttons}
-        onPress={(color) => {this.setState({ color: color }), this.drawer.closeDrawer()}}
-      />);
+        onPress={(color) => { this.setState({ color: color }, () => this.drawer.closeDrawer()) }}
+      />)
+  }
+
+  render() {
 
     return (
       <DrawerLayoutAndroid
         ref={(ref) => (this.drawer = ref)}
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={menu}
+        renderNavigationView={() => this.getMenu()}
       >
         <Page color={this.state.color} />
       </DrawerLayoutAndroid>
