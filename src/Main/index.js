@@ -2,37 +2,69 @@
  * Created by batmah on 23.09.16.
  */
 'use strict';
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import axios from 'axios';
 
-const styles = StyleSheet.create({
-  tabContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: 'white',
-    margin: 50,
-  },
-});
+import Users from './Users';
+import User from './User';
 
-const Page = ({color, pageText, count}) => {
-  return (
-    <View style={[styles.tabContent, {backgroundColor: color}]}>
-      <Text style={styles.tabText}>{pageText}</Text>
-      <Text style={styles.tabText}>{count} re-renders of the {pageText}</Text>
-    </View>
-  );
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: 0,
+      users: null
+    };
+    this.selectUser = this.selectUser.bind(this)
+    this.changeInfo = this.changeInfo.bind(this)
+  }
+
+  componentWillMount() {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then((response) => this.setState({ users: response.data }))
+      .catch((errror) => console.error(errror))
+  }
+
+  selectUser(userId){
+    this.setState({userId});
+  }
+
+  changeInfo(key, value) {
+    const index = this.state.users.findIndex(user => user.id === this.state.userId)
+    const users = this.state.users.slice();
+    users[index][key] = value;
+    this.setState({users});
+  }
+
+  render() {
+    console.log(this.state.users);
+    if (!this.state.users) {
+      return (
+        <Text>
+          Loading...
+        </Text>
+      )
+    }
+
+    if (!this.state.userId) {
+      return (
+        <Users users={this.state.users} selectUser={this.selectUser}/>
+      )
+    }
+
+    const user = this.state.users.find(user => user.id === this.state.userId);
+
+    return (
+      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
+    )
+
+  }
 }
 
-Page.propTypes = {
-  color: PropTypes.string.isRequired,
-  pageText:PropTypes.string.isRequired,
-  count:PropTypes.number.isRequired
-};
-
-export default Page;
+export default App;
