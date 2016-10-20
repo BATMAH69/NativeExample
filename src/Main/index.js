@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 import axios from 'axios';
 
@@ -54,14 +55,19 @@ class App extends Component {
 
     if (!this.state.userId) {
       return (
-        <Users users={this.state.users} selectUser={this.selectUser}/>
+        <ScrollView>
+          <Users users={this.state.users} selectUser={this.selectUser} />
+          <Users users={this.state.users} selectUser={this.selectUser} />
+        </ScrollView>
       )
     }
 
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
+      <ScrollView>
+        <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo} />
+      </ScrollView>
     )
 
   }
