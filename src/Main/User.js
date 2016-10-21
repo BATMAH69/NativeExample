@@ -41,14 +41,23 @@ const style = StyleSheet.create({
   input: {
     width: 150
   },
-  buttons:{
+  buttons: {
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  button:{
+  button: {
     margin: 10
   }
 });
+
+const Button = ({ onClick, children }) => (
+  <View>
+    <TouchableOpacity onPress={onClick}>
+      <Text style={style.button}>{ children }</Text>
+    </TouchableOpacity>
+  </View>
+);
+
 
 const UsersInfoRow = ({ description, value, changeInfo }) => (
   <View style={style.row}>
@@ -86,12 +95,10 @@ const User = ({ user, changeInfo, selectUser }) => (
       }
     </View>
     <View style={style.buttons}>
-      <TouchableOpacity onPress={() => selectUser(0)}>
-        <Text style={style.button}>Назад</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => sendUser(user)}>
-        <Text style={style.button}>Отправить</Text>
-      </TouchableOpacity>
+      <Button onClick={() => selectUser(user.id - 1)}>{'<-'}</Button>
+      <Button onClick={() => selectUser(0)}>Список</Button>
+      <Button onClick={() => sendUser(user)}>Отправить</Button>
+      <Button onClick={() => selectUser(user.id + 1)}>{'->'}</Button>
     </View>
   </View>
 );
